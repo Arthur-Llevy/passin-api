@@ -11,4 +11,6 @@ colocar "include": ["src"] se houver um diretório
 	npm i prisma -D
 	npx prisma init --datasource-provider SQLite
 	npx tsx watch --env-file file.env diretório
+	npx prisma migrate
+	npx prisma studio
 ```

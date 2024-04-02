@@ -16,9 +16,10 @@ model Event {
 
   id String @id @default(uuid())
   title String 
-  details String? // campo opicional
+  details String? 
   slug String @unique
-  maximumAtteends Int? @map("maximum_atteends")
+  maximumAtteends Int? @map("maximum_atteends") // um "@" é apenas configuração no campo. Dois para alteração na tabela
+
 
   // @@map("events") - renomeá-la
 }
