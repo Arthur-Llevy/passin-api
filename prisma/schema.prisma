@@ -13,13 +13,25 @@ datasource db {
 
 // Criar model da tabela
 model Event {
-
   id String @id @default(uuid())
   title String 
   details String? 
   slug String @unique
   maximumAtteends Int? @map("maximum_atteends") // um "@" é apenas configuração no campo. Dois para alteração na tabela
+  attendees Attendee[]
 
+  @@map("events")
+}
 
-  // @@map("events") - renomeá-la
+model Attendee {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  createdA DateTime @default(now())
+
+  eventId String 
+  event Event @relation(fields: [eventId], references: [id])
+
+  @@unique([eventId, email])
+  @@map("attendees")
 }

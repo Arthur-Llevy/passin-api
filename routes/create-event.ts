@@ -9,18 +9,18 @@ export async function createEvent(app: FastifyInstance) {
 		body: z.object({
 			title: z.string().min(5),
 			details: z.string().nullable(),
-			maximumAtteends: z.number().int().positive().nullable()
+			maximumAtteendees: z.number().int().positive().nullable()
 		})
 	}
 }, async (request, reply) => {
 
-	const { title, details, maximumAtteends } = request.body;
+	const { title, details, maximumAtteendees } = request.body;
 
 	const event = await prisma.event.create({
 		data: {
 			title: title,
 			details: details,
-			maximumAtteends: maximumAtteends,
+			maximumAtteends: maximumAtteendees,
 			slug: (Math.floor(Math.random() * 1000)).toString()
 		},
 	})
