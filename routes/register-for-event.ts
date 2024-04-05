@@ -26,17 +26,19 @@ export async function registerForEvent(app: FastifyInstance){
 		const { eventId } = request.params;
 		const { name, email } = request.body;
 
-		const event = await prisma.event.findUnique({
-			where: {
-				id: eventId
-			}
-		});
+		const [event, amountOfAttendeesForEvent] = await Promise.all([
+			await prisma.event.findUnique({
+				where: {
+					id: eventId
+				}
+			}),
 
-		const amountOfAttendeesForEvent = await prisma.attendee.count({
-			where: {
-				eventId,
-			}
-		})
+			await prisma.attendee.count({
+				where: {
+					eventId,
+				}
+			})
+		])
 
 		const attendeeFromEmail = await prisma.attendee.findFirst({
 			where: {
