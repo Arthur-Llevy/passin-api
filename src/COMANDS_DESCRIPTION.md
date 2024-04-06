@@ -14,6 +14,10 @@ Instalar as libs que serão utilizadas: fastify, prisma, fastify-type-provider-z
 	npm i fastify
 	npm i prisma -D
 	npm i fastify-type-provider-zod
+	npm i @fastify/swagger
+	npm i @fastify/swagger-ui
+	npm i @fastify/cors
+	npm i tsup -D
 ```
 
 ```

@@ -10,8 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-// Criar model da tabela
 model Event {
   id String @id @default(uuid())
   title String 
@@ -27,11 +25,23 @@ model Attendee {
   id Int @id @default(autoincrement())
   name String
   email String @unique
-  createdA DateTime @default(now())
+  createdAt DateTime @default(now())
 
   eventId String 
-  event Event @relation(fields: [eventId], references: [id])
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  checkIn CheckIn?
 
   @@unique([eventId, email])
   @@map("attendees")
+}
+
+model CheckIn {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  attendeeId Int @unique @map("attendee_id")
+  attendee Attendee @relation(fields: [attendeeId], references: [id], onDelete: Cascade)
+
+  @@map("check_ins")
 }
